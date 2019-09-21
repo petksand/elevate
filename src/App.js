@@ -6,6 +6,7 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Content from './components/content/Content';
 import Home from './components/content/Home';
+import BusinessPortal from "./components/content/BusinessPortal";
 
 
 export const App = () => {
@@ -17,7 +18,7 @@ export const App = () => {
         </Header>
         <Content>
           {/* Routes/Pages can go in here */}
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact component={Home}/>
         </Content>
         <Footer>
           {/* Team Info and external links can go in here */}
