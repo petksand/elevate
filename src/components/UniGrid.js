@@ -6,14 +6,19 @@ class UniGrid extends Component {
   render() {
     return (
       <Grid rows={["auto", "flex", "auto"]}>
-        <Box tag="header" background= "#ccccff" height="medium">
-          Header
+        <Box pad="medium" tag="header" background="brand" height="medium">
         </Box>
-        <Box direction="column" justify="center">
-          <Box background="light-2" width="xxlarge" height="medium">
+
+        <Box pad="medium" direction="column" justify="center">
+          <Box
+            pad="medium"
+            background="light-2"
+            width="xxlarge"
+            height="medium"
+          >
             sidebar
           </Box>
-          <Box overflow="auto" width="xxlarge" height="xxlarge">
+          <Box pad="medium" overflow="auto" width="xxlarge" height="xxlarge">
             <p>feed</p>
             <p>feed</p>
             <p>feed</p>
