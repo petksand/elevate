@@ -7,39 +7,24 @@ from fuzzywuzzy import process
 finance = ["idp purchase", "transfer", "payment", "interac"]
 
 
-def get_reader(filename):
-    """
-    Returns csv DictReader object
-    """
-    # read file in
-    with open(filename, "r", encoding="utf-8") as f:
-        csv_reader = csv.DictReader(f, delimiter=',')
-        
-    return csv_reader
-
-
-def match(name):
+def match(name, matchlist=None):
     """
     Matches given name to business name from Yelp search
     """
     if name == None:
         return ("",0)
-    
-    stores = yelp.search(name)
-    matches = []
-    for i, store in enumerate(stores["businesses"]):
-        matches.extend(store["name"])
+    try:
+        stores = yelp.search(name)
+        if matchlist == None:
+            matches = []
+            for store in stores["businesses"]:
+                matches.append(store["name"])
 
-    closest = process.extractOne(name, matches)
-    return closest
-
-    # str2Match = "apple inc"
-    # strOptions = ["Apple Inc.","apple park","apple incorporated","iphone"]
-    # Ratios = process.extract(str2Match,strOptions)
-    # print(Ratios)
-    # # You can also select the string with the highest matching percentage
-    # highest = process.extractOne(str2Match,strOptions)
-    # print(highest)
+            return process.extractOne(name, matches)
+        else:
+            return process.extractOne(name, matchlist)
+    except RuntimeError:
+        return("",0)
 
 
 def preprocess(name):
@@ -48,7 +33,12 @@ def preprocess(name):
     """
     if name.strip() == "" or any([term in name for term in finance]):
         return None
+    
+    # remove non alphanumeric characters
     pattern = re.compile(r'[^a-zA-Z\ ]')
+    name = pattern.sub("",name)
+    # remove 1-letter words at the end (cut off)
+    pattern = re.compile(r' [a-zA-Z]{1}$')
     
     return pattern.sub("",name)
 
@@ -56,20 +46,32 @@ def preprocess(name):
 def main():
     f = open("transactions.csv", "r", encoding="utf-8")
     csv_reader = csv.DictReader(f, delimiter=",")
-    for i, row in enumerate(csv_reader):
+    for row in csv_reader:
         name1 = preprocess(row["Description 1"].lower())
         name2 = preprocess(row["Description 2"].lower())
         match1 = match(name1)
         match2 = match(name2)
         
-        best = match1 if max(match1[1],match2[1]) == match[1] else match2
+        best = match1 if max(match1[1],match2[1]) == match1[1] else match2
+        name = name1 if max(match1[1],match2[1]) == match1[1] else name2
         
-        print("{} matches the closest with {} with a confidence of {}".format(name, ))
+        if best[1] < 90:
+            print("Confidence not high enough, trying again")
+            # match not very good, we'll try again with an autocomplete query
+            autocomplete = yelp.autocomplete(name)
+            if autocomplete != None:
+                matches = [result["text"] for result in autocomplete]
+                best = match(name, matchlist=matches)
+            else:
+                best = ("",0)
 
-        if i >= 2:
-            break
-    
+        if best[1] < 90:
+            print("No close matches for {}".format(name))
+        else:
+            print("{} matches the closest with {} with a confidence of {}".format(name, best[0], best[1]))
 
+    return search(best[0])
+        
 
 if __name__ == '__main__':
     main()
