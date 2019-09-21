@@ -1,15 +1,22 @@
 import React from 'react';
-import { Layout } from 'antd';
-import { Link } from 'react-router-dom';
-import { Button } from 'antd';
+import { Layout, Menu, Button } from 'antd';
+import { links } from './links';
+
 const { Header: AntHeader } = Layout;
+
 
 export const Header = () => {
     return (
         <AntHeader>
-            <Link to="/"><Button type="primary">Home</Button></Link>
-            <Link to="/promotions"><Button>Promotions</Button></Link>
-            <Link to="/businesses"><Button>Business</Button></Link>
+            <div className="logo" />
+            <Menu
+                theme="dark"
+                mode="horizontal"
+                defaultSelectedKeys={['2']}
+                style={{ lineHeight: '64px' }}
+            >
+                {links.map(Link => <Menu.Item><Link /></Menu.Item>)}
+            </Menu>
         </AntHeader>
     );
 };
