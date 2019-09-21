@@ -10,7 +10,7 @@ const { Content: AntContent } = Layout;
 export const Content = () => {
     return (
         <AntContent>
-            <Route path="/" component={Home} />
+            <Route path="/" exact component={Home} />
             <Route path="/promotions" exact component={Promotions} />
             <Route path="/businesses" exact component={BusinessPortal} />
         </AntContent>

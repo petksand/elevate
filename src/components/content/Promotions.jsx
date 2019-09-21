@@ -2,7 +2,7 @@ import React from "react";
 
 class Promotions extends React.Component {
     render() {
-        return null;
+        return <div>Hello promos</div>;
     }
 }
 
