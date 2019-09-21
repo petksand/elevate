@@ -10,9 +10,6 @@ class UniGrid extends Component {
           Header
         </Box>
         <Box direction="column" justify="center">
-          <Box width="small" background="light-2" width="xxlarge" height="xxlarge">
-            sidebar
-          </Box>
           <Box overflow="auto" width="xxlarge" height="xxlarge">
             <p>feed</p>
             <p>feed</p>
