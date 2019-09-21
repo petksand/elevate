@@ -8,13 +8,13 @@ const { Header: AntHeader } = Layout;
 export const Header = () => {
     return (
         <AntHeader>
-            <div className="logo" />
             <Menu
                 theme="dark"
                 mode="horizontal"
                 defaultSelectedKeys={['2']}
                 style={{ lineHeight: '64px' }}
-            >
+                >
+                <Menu.Item><div className="logo" /></Menu.Item>
                 {links.map(Link => <Menu.Item><Link /></Menu.Item>)}
             </Menu>
         </AntHeader>
