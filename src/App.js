@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
-import { Route, Router, Link } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Link } from 'react-router-dom';
 import { Layout } from 'antd';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Content from './components/content/Content';
+import Home from './components/content/Home';
 
 
 export const App = () => {
@@ -15,7 +16,8 @@ export const App = () => {
           {/* Links can go in here */}
         </Header>
         <Content>
-          {/* Pages can go in here */}
+          {/* Routes/Pages can go in here */}
+          <Route path="/" exact component={Home} />
         </Content>
         <Footer>
           {/* Team Info and external links can go in here */}
