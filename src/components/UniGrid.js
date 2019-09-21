@@ -10,8 +10,14 @@ class UniGrid extends Component {
           Header
         </Box>
 
-        <Box background="light-2" pad="medium"  width="xxlarge" height="medium">
-          <Button label="Default"/>
+        <Box
+          background="light-2"
+          pad="medium"
+          fit
+          width="xxlarge"
+          height="medium"
+        >
+          <Button label="Default" align="center" />
         </Box>
         <Box pad="medium" overflow="auto" width="xxlarge" height="xxlarge">
           <p>feed</p>
