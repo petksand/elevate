@@ -7,6 +7,7 @@ import Footer from './components/footer/Footer';
 import Content from './components/content/Content';
 import Home from './components/content/Home';
 import Promotions from './components/content/Promotions';
+import BusinessPortal from './components/content/BusinessPortal';
 
 export const App = () => {
   return (
@@ -16,10 +17,12 @@ export const App = () => {
           <Header>
             <Link to="/"><Button type="primary">Home</Button></Link>
             <Link to="/promotions"><Button>Promotions</Button></Link>
+            <Link to="/businesses"><Button>Business</Button></Link>
           </Header>
           <Content>
             <Route path="/" component={Home} />
             <Route path="/promotions" exact component={Promotions} />
+            <Route path="/businesses" exact component={BusinessPortal} />
           </Content>
           <Footer>
             {/* Team Info and external links can go in here */}
