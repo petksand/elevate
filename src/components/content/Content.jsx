@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import Home from './Home';
 import Promotions from './Promotions';
 import BusinessPortal from './BusinessPortal';
+import Transactions from './Transactions';
 
 const { Content: AntContent } = Layout;
 
@@ -13,6 +14,7 @@ export const Content = () => {
             <Route path="/" exact component={Home} />
             <Route path="/promotions" exact component={Promotions} />
             <Route path="/businesses" exact component={BusinessPortal} />
+            <Route path="/transactions" exact component={Transactions} />
         </AntContent>
     );
 };
