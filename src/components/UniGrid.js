@@ -6,7 +6,7 @@ class UniGrid extends Component {
   render() {
     return (
       <Grid rows={["auto", "flex", "auto"]}>
-        <Box tag="header" background="brand" height="medium">
+        <Box tag="header" background= "#ccccff" height="medium">
           Header
         </Box>
         <Box direction="column" justify="center">
