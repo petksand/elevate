@@ -13,9 +13,7 @@ export const App = () => {
         <Layout>
           <Header />
           <Content />
-          <Footer>
-            {/* Team Info and external links can go in here */}
-          </Footer>
+          <Footer />
         </Layout>
       </div>
     </Router>
