@@ -122,6 +122,9 @@ def add_transaction(transaction):
 
     return db_trans
 
+def get_all_transactions():
+    return list(trans.find())
+
 
 # # what a transaction object will look like (we fill categories, though)
 # test_transaction = {
