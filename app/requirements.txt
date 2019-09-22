@@ -1,2 +1,7 @@
-requests
+requests==2.22.0 
 fuzzywuzzy
+Flask==1.1.1
+qrcode==6.1
+pymongo
+dnspython==1.16.0
+Image==1.5.27

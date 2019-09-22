@@ -1,0 +1,25 @@
+pool:
+  vmImage: ubuntu-16.04
+
+steps:
+
+- task: Docker@2
+  displayName: Build & Push Image to Heroku
+  inputs:
+    containerRegistry: heroku
+    repository: uniwards-api/web
+    command: buildAndPush
+
+# - bash: |
+#     set -ex
+
+#     docker_image_id=$(docker inspect registry.heroku.com/uniwards-api/web:$BUILD_BUILDID --format={{.Id}}) 
+#     echo '~~~~~~~~~~~~~~~~'
+#     echo "docker_image_id: $docker_image_id"
+#     echo '~~~~~~~~~~~~~~~~'
+#     curl -X PATCH "https://api.heroku.com/apps/uniwards-api/formation"    \
+#       --fail --show-error                                                 \
+#       -H "Authorization: Bearer 53e37733-6f7c-42dc-9f01-b34a14960f94"     \
+#       -H "Content-Type: application/json"                                 \
+#       -H "Accept: application/vnd.heroku+json; version=3.docker-releases" \
+#       -d "{\"updates\":[{\"type\":\"web\",\"docker_image\":\"$docker_image_id\"}]}"
