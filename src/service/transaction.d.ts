@@ -1,7 +1,7 @@
 export interface Transaction {
     name:           string;
     parent_aliases: string[];
-    amount:         string;
+    amount:         number;
     month:          string;
-    day:            string;
+    day:            number;
 }

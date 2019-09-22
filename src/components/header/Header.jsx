@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Avatar } from 'antd';
+import { Layout, Menu } from 'antd';
 import { links } from './links';
 
 const { Header: AntHeader } = Layout;

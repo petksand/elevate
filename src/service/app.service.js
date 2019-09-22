@@ -10,8 +10,7 @@ export class AppService {
      * @returns {Promise<import('./transaction').Transaction[]>}
      */
     async transactions() {
-        const r = await axios.get('');
-
+        const r = await this.axios.get('');
         return r.data;
     }
 }
