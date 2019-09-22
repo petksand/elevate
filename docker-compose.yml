@@ -1,0 +1,8 @@
+version: "3.0"
+services:
+  app:
+    build: ./app/Dockerfile
+  web:
+    build: .
+    ports:
+      - "8080:3000"
