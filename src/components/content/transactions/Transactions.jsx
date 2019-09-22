@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Card, Col, Row, Icon, Avatar, Table, Divider, Tag } from 'antd';
+import { Card, Col, Row, Icon, Avatar, Table, Divider, Tag, Popover } from 'antd';
 import { AppContext } from '../../../App.context';
+import { TransactionsTable } from './TransactionsTable';
 
 const { Meta } = Card;
 
@@ -9,96 +10,15 @@ export const Transactions = () => {
 
   const { uniwards } = useContext(AppContext);
 
+  const qrClicked = evt => {
+    console.log(evt);
+  };
+
   useEffect(() => {
     uniwards
       .transactions()
       .then(setTransactions);
   }, [uniwards]);
-
-  const columns = [
-    {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      render: text => <a>{text}</a>,
-    },
-    {
-      title: 'Amount',
-      dataIndex: 'amount',
-      key: 'amount',
-    },
-    {
-      title: 'Date',
-      dataIndex: 'date',
-      key: 'date',
-    },
-    {
-      title: 'Location',
-      dataIndex: 'location',
-      key: 'location',
-    },
-    {
-      title: 'Tags',
-      key: 'tags',
-      dataIndex: 'tags',
-      render: tags => (
-        <span>
-          {tags.map(tag => {
-            let color = tag.length > 5 ? 'geekblue' : 'green';
-            if (tag === 'loser') {
-              color = 'volcano';
-            }
-            return (
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </span>
-      ),
-    },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (text, record) => (
-        <span>
-          <a>Find deals for {record.name}</a>
-          <Divider type="vertical" />
-          <a>Details</a>
-        </span>
-      ),
-    },
-  ];
-
-  let current_datetime = new Date()
-  let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds() 
-  
-  const data = [
-    {
-      key: '1',
-      name: 'Mos Mos',
-      amount: "$"+15,
-      date: formatted_date,
-      location: '88 Queens Quay West',
-      tags: ['coffee', 'food'],
-    },
-    {
-      key: '2',
-      name: "TopHat",
-      amount: "$"+42,
-      date: formatted_date,
-      location: '151 Bloor St W Suite 200',
-      tags: ['education','software'],
-    },
-    {
-      key: '3',
-      name: 'Revelo Bikes',
-      amount: "$"+1520,
-      date: formatted_date,
-      location: '42 Industrial Street',
-      tags: ['bike', 'outdoor', 'sports'],
-    },
-  ];
 
   return (
     <div style={{ padding: '30px' }}>
@@ -113,7 +33,9 @@ export const Transactions = () => {
               />
             }
             actions={[
-              <Icon type="qrcode" key="qrcode" />,
+              <Popover content={<img src="/qrcodes/Starbucks_5d8747efdcfff11b0977c0be_qr_code.jpg" />} title="Mos Mos">
+                <Icon type="qrcode" key="qrcode" />
+              </Popover>,
               <Icon type="dollar" key="dollar" />,
             ]}
           >
@@ -124,7 +46,7 @@ export const Transactions = () => {
             />
           </Card>
         </Col>
-        <Col span={8}>
+        <Col span={8} style={{ height: '100%' }}>
           <Card
             style={{ width: 300 }}
             cover={
@@ -134,7 +56,9 @@ export const Transactions = () => {
               />
             }
             actions={[
-              <Icon type="qrcode" key="qrcode" />,
+              <Popover content={<img src="/qrcodes/Swiss_Chalet_5d8747eedcfff11b0977c0bd_qr_code.jpg" />} title="Top Hat">
+                <Icon type="qrcode" key="qrcode" />
+              </Popover>,
               <Icon type="dollar" key="dollar" />,
             ]}
           >
@@ -155,7 +79,9 @@ export const Transactions = () => {
               />
             }
             actions={[
-              <Icon type="qrcode" key="qrcode" />,
+              <Popover content={<img src="/qrcodes/Metro_5d8747ffdcfff11b0977c0c8_qr_code.jpg" />} title="Top Hat">
+                <Icon type="qrcode" key="qrcode" />
+              </Popover>,
               <Icon type="dollar" key="dollar" />,
             ]}
           >
@@ -168,7 +94,7 @@ export const Transactions = () => {
         </Col>
       </Row>
       <Divider />
-      <Row><Table columns={columns} dataSource={data} /></Row>
+      <Row><TransactionsTable /></Row>
     </div>
   );
 }

@@ -5,7 +5,7 @@ const { Footer: AntFooter } = Layout;
 
 export const Footer = () => {
     return (
-        <AntFooter style={{ textAlign: 'center' }}>
+        <AntFooter style={{ textAlign: 'center', height: '2.5em' }}>
             Aloha
         </AntFooter>
     );

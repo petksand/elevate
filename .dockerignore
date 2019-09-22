@@ -1,4 +1,4 @@
-app
 node_modules
 build
 dist
+src
