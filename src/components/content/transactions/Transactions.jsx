@@ -80,8 +80,8 @@ export const Transactions = () => {
             }
             actions={[
               <Popover content={<img src="/qrcodes/Metro_5d8747ffdcfff11b0977c0c8_qr_code.jpg" />} title="Top Hat">
-              <Icon type="qrcode" key="qrcode" />
-            </Popover>,
+                <Icon type="qrcode" key="qrcode" />
+              </Popover>,
               <Icon type="dollar" key="dollar" />,
             ]}
           >
