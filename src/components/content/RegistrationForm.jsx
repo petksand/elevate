@@ -134,20 +134,20 @@ class RegistrationForm extends React.Component {
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
         <Form.Item
           label="Business name">
-          {getFieldDecorator("Business name")(<Input />)}
-        </Form.Item>
-        <Form.Item
-          label="Promotion name">
-          {getFieldDecorator("Promotion Name")(<Input />)}
+          {getFieldDecorator("name")(<Input />)}
         </Form.Item>
         <Form.Item label="Promotion type">
-          {getFieldDecorator("Promotion type", {
+          {getFieldDecorator("type", {
             initialValue: ["Monthly Category"],
             rules: [{ type: "array" }]
           })(<Cascader options={promoTypes} />)}
         </Form.Item>
+        <Form.Item
+          label="Promotion name">
+          {getFieldDecorator("desc")(<Input />)}
+        </Form.Item>
         <Form.Item label="Month">
-          {getFieldDecorator("Month", {
+          {getFieldDecorator("month", {
             initialValue: ["January"],
             rules: [{ type: "array" }]
           })(<Cascader options={Month} />)}
@@ -155,14 +155,22 @@ class RegistrationForm extends React.Component {
         <Form.Item {...numberItemLayout}
           label={
             <span>
-              Discount
+              Minimum Monthly Amount spent
+            </span>
+          } >
+          {getFieldDecorator("Minimum Monthly Amount spent")(<Input />)}
+        </Form.Item>
+        <Form.Item {...numberItemLayout}
+          label={
+            <span>
+              Discount Percentage
               <Tooltip title="What percentage of discount do you want to offer?">
                 <Icon type="percentage" />
               </Tooltip>
             </span>
           }
         >
-          {getFieldDecorator("Discount", {
+          {getFieldDecorator("discount_percent", {
             rules: [
               {
                 required: true,
@@ -181,10 +189,10 @@ class RegistrationForm extends React.Component {
         <Form.Item {...numberItemLayout}
           label={
             <span>
-              Minimum Monthly Amount spent
+              QR code id
             </span>
           } >
-          {getFieldDecorator("Minimum Monthly Amount spent")(<Input />)}
+          {getFieldDecorator("qr_code_id")(<Input />)}
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>
