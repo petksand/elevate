@@ -1,0 +1,54 @@
+# promo1 = {
+#     "name": "Mos Mos",
+#     "categories": [
+#         "coffeeshop"
+#     ],
+#     "type": "monthly_category",
+#     "desc": "10_percent_discount",
+#     "month": "january",
+#     "minimum": 50,
+#     "discount_percent": 10,
+#     "curr_amount": 0,
+# }
+
+test_promotions = {
+    "test_promos": [
+        {
+            "name": "Mos Mos",
+            "type": "monthly_category",
+            "desc": "10_percent_discount",
+            "month": "january",
+            "minimum": 50,
+            "discount_percent": 10,
+        },
+        {
+            "name": "Starbucks",
+            "type": "monthly_specific",
+            "desc": "20_percent_discount",
+            "month": "january",
+            "minimum": 50,
+            "discount_percent": 20,
+        },
+        {
+            "name": "McDonalds",
+            "type": "daily_specific",
+            "desc": "30_percent_discount",
+            "month": "january",
+            "day": 31
+            "minimum": 50,
+            "discount_percent": 30,
+        }
+    ],
+}
+
+
+test_transaction = {
+    "name": "Mos Mos",
+    "categories": [
+        "coffeeshop"
+    ],
+    "amount": 60,
+    "month": "january",
+    "day": 19,
+}
+
