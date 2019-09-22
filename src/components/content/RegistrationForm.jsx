@@ -137,11 +137,11 @@ class RegistrationForm extends React.Component {
           {getFieldDecorator("Business name")(<Input />)}
         </Form.Item>
         <Form.Item
-          label="Promo name">
-          {getFieldDecorator("Promo NAME")(<Input />)}
+          label="Promotion name">
+          {getFieldDecorator("Promotion Name")(<Input />)}
         </Form.Item>
         <Form.Item label="Promotion type">
-          {getFieldDecorator("promoTypes", {
+          {getFieldDecorator("Promotion type", {
             initialValue: ["Monthly Category"],
             rules: [{ type: "array" }]
           })(<Cascader options={promoTypes} />)}
@@ -157,12 +157,12 @@ class RegistrationForm extends React.Component {
             <span>
               Discount
               <Tooltip title="What percentage of discount do you want to offer?">
-                <Icon type="question-circle-o" />
+                <Icon type="percentage" />
               </Tooltip>
             </span>
           }
         >
-          {getFieldDecorator("discount", {
+          {getFieldDecorator("Discount", {
             rules: [
               {
                 required: true,
