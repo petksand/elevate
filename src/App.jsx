@@ -10,7 +10,7 @@ export const App = () => {
   return (
     <Router>
       <div className="App">
-        <Layout>
+        <Layout style={{ height: '100vh' }}>
           <Header />
           <Content />
           <Footer />

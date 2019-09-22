@@ -5,8 +5,8 @@ const { Footer: AntFooter } = Layout;
 
 export const Footer = () => {
     return (
-        <AntFooter>
-            
+        <AntFooter style={{ textAlign: 'center' }}>
+            Hello Daddy
         </AntFooter>
     );
 };
