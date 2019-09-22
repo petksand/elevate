@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 import { Card, Icon, Avatar, Typography, Carousel } from "antd";
 const { Text } = Typography;
 const { Meta } = Card;
 
-const Reebok = () =>
+const TeamStudy = () => (
   <Card
     style={{ width: 300, margin: "1.5rem" }}
     actions={[
@@ -16,14 +16,15 @@ const Reebok = () =>
   >
     <Meta
       avatar={
-        <Avatar src="https://www.lafabricadebordados.es/2611-large_default/reebok-logo-embroidered-patch.jpg" />
+        <Avatar shape="square" src="https://media.licdn.com/dms/image/C560BAQHnbkwXn-4pLQ/company-logo_200_200/0?e=2159024400&v=beta&t=oMGIsvYIrx8HPgq7YiI3GQqxkftiICm_Lat5ejjrpGc" />
       }
-      title="Reebok"
-      description="Take 12% off your next purchase. Conditions apply; see details for more information."
+      title="Team Study"
+      description="Free study notes. Conditions apply; see details for more information."
     />
-  </Card>;
+  </Card>
+);
 
-const Gymshark = () =>
+const Chazle = () => (
   <Card
     style={{ width: 300, margin: "1.5rem" }}
     actions={[
@@ -35,19 +36,23 @@ const Gymshark = () =>
   >
     <Meta
       avatar={
-        <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3Xsbq68JKdT8INp0JJCBQkclv-NBgC41xp5VakmzuRojsDK4d" />
+        <Avatar shape="square" src="https://media.licdn.com/dms/image/C560BAQG8Kgxk_JNMiw/company-logo_200_200/0?e=2159024400&v=beta&t=d3HIDBybFNmfzmu9nyUaQpth7QNFedMJmp11axNTvD4" />
       }
-      title="Gymshark"
-      description="Take 70% off your next purchase of $200 or more. Conditions apply; see details for more information."
+      title="Chazle"
+      description="Take 30% off your next software project. Conditions apply; see details for more information."
     />
-  </Card>;
+  </Card>
+);
 
-const cards = [Reebok, Gymshark];
+const cards = [Chazle, TeamStudy];
 
-const repeat = arr => count => [...Array(count).keys()].reduce((p, _) => [...p, ...arr], arr);
+const repeat = arr => count =>
+  [...Array(count).keys()].reduce((p, _) => [...p, ...arr], arr);
 
 export const PromotionCards = () => (
   <>
-    {repeat(cards)(3).map((Card, i) => <Card key={Card.name+i}/>)}
+    {repeat(cards)(100).map((Card, i) => (
+      <Card key={Card.name + i} />
+    ))}
   </>
 );
