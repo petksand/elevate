@@ -64,11 +64,23 @@ def demo():
         data = request.json
         data = t.add_transaction(data)
         rval = {
-            "message": "Successly created transaction",
+            "message": "Successfully retrived all transactions",
             "statusCode": 200,
             "data": data
         }
         return JSONEncoder().encode(rval), 200
+
+@app.route('/transactions', methods=["POST"])
+def all_transactions():
+    if request.method == "POST":
+        data = t.get_all_transactions()
+        rval = {
+            "message": "Successly created transaction",
+            "statusCode": 200,
+            "all_transactions": data
+        }
+        return JSONEncoder().encode(rval), 200
+
 
 
 app.run()

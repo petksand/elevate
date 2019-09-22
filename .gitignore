@@ -25,6 +25,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # security
-/app/yelp_api.py
 
 /**/__pycache__
