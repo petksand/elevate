@@ -5,10 +5,14 @@ import transactions as t
 import logic
 import json
 from bson import ObjectId
+from flask_cors import CORS
 
 PORT = int(os.getenv("PORT", "80"))
+
 app = Flask(__name__)
-app.config["DEBUG"] = True
+CORS(app)
+
+app.config["DEBUG"] = False if os.getenv("PRODUCTION") is not None else True
 
 class JSONEncoder(json.JSONEncoder):
     def default(self, o):
