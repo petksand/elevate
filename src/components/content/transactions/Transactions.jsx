@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Card, Col, Row, Icon, Avatar, Table, Divider, Tag } from 'antd';
-import { AppContext } from '../../App.context';
+import { AppContext } from '../../../App.context';
 
 const { Meta } = Card;
 
@@ -13,7 +13,7 @@ export const Transactions = () => {
     uniwards
       .transactions()
       .then(setTransactions);
-  }, []);
+  }, [uniwards]);
 
   const columns = [
     {
@@ -101,7 +101,7 @@ export const Transactions = () => {
   ];
 
   return (
-    <div style={{ background: '#ECECEC', padding: '30px' }}>
+    <div style={{ padding: '30px' }}>
       <Row gutter={16}>
         <Col span={8}>
           <Card
