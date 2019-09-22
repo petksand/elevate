@@ -2,10 +2,15 @@ import csv
 import yelp_api as yelp
 import re
 from fuzzywuzzy import process
+from pymongo import MongoClient
 
+client = MongoClient('mongodb+srv://db_user:Password1@uniwards-9pud4.mongodb.net/test?retryWrites=true&w=majority')
+db = client.uniwards_db
+trans = db.transactions
+
+# should feed in transaction data as json, modify below
 
 finance = ["idp purchase", "transfer", "payment", "interac"]
-
 
 def match(name, matchlist=None):
     """
@@ -43,35 +48,87 @@ def preprocess(name):
     return pattern.sub("",name)
 
 
-def main():
-    f = open("transactions.csv", "r", encoding="utf-8")
-    csv_reader = csv.DictReader(f, delimiter=",")
-    for row in csv_reader:
-        name1 = preprocess(row["Description 1"].lower())
-        name2 = preprocess(row["Description 2"].lower())
-        match1 = match(name1)
-        match2 = match(name2)
-        
-        best = match1 if max(match1[1],match2[1]) == match1[1] else match2
-        name = name1 if max(match1[1],match2[1]) == match1[1] else name2
-        
-        if best[1] < 90:
-            print("Confidence not high enough, trying again")
-            # match not very good, we'll try again with an autocomplete query
-            autocomplete = yelp.autocomplete(name)
-            if autocomplete != None:
-                matches = [result["text"] for result in autocomplete]
-                best = match(name, matchlist=matches)
-            else:
-                best = ("",0)
+def trans_add_category(transaction):
+    """
+    Populates the "categories" key in the transaction json and pushes to db
+    """
+    # find name in yelp
+    name = preprocess(transaction["name"])
+    name = match(name)
 
-        if best[1] < 90:
-            print("No close matches for {}".format(name))
+    if name[1] < 90:
+        # try again w/ autocomplete
+        print("Confidence not high enough, trying again")
+        autocomplete = yelp.autocomplete(name[0])
+        if autocomplete != None:
+            matches = [result["text"] for result in autocomplete]
+            best = match(name[0], matchlist=matches)
         else:
-            print("{} matches the closest with {} with a confidence of {}".format(name, best[0], best[1]))
+            best = ("",0)
 
-    return search(best[0])
+    if name[1] < 90:
+        print("No close matches for {}".format(name))
+        return False   
+    else:
+        name = name[0]
+
+    categories = yelp.search(name)["businesses"][0]
+    categories = categories['categories']
+    categories = [category["alias"] for category in categories]
+
+    transaction["categories"] = categories
+
+    return transaction
+
+
+def add_transaction(transaction):
+    """
+    Populates the "categories" key in the transaction json and pushes to db
+    """
+    db_trans = {
+        "name": transaction['name'],
+        "amount": transaction['amount'],
+        "month": transaction["month"],
+        "day": transaction["day"],
+    }
+    # find name in yelp
+    name = preprocess(transaction["name"])
+    name = match(name)
+
+    if name[1] < 90:
+        # try again w/ autocomplete
+        # print("Confidence not high enough, trying again")
+        autocomplete = yelp.autocomplete(name[0])
+        if autocomplete != None:
+            matches = [result["text"] for result in autocomplete]
+            best = match(name[0], matchlist=matches)
+        else:
+            best = ("",0)
+
+    if name[1] < 90:
+        # print("No close matches for {}".format(name))
+        return False   
+    else:
+        name = name[0]
+
+    categories = yelp.search(name)["businesses"][0]
+    categories = categories['categories']
+    categories = [category["alias"] for category in categories]
+
+    db_trans["categories"] = categories
+
+    # push to database
+    result = trans.insert_one(db_trans)
+
+    return db_trans
+
+
+# # what a transaction object will look like (we fill categories, though)
+# test_transaction = {
+#     "name": "Mos Mos",
+#     "amount": 60,
+#     "month": "january",
+#     "day": 19,
+# }
         
-
-if __name__ == '__main__':
-    main()
+# get_transaction_categories(test_transaction)
