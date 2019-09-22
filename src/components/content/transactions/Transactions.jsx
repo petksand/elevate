@@ -33,7 +33,7 @@ export const Transactions = () => {
               />
             }
             actions={[
-              <Popover content={<img src="/qrcodes/Starbucks_5d8747efdcfff11b0977c0be_qr_code.jpg" />} title="Mos Mos">
+              <Popover content={<img src="/qrcodes/mos.png" />} title="Mos Mos">
                 <Icon type="qrcode" key="qrcode" />
               </Popover>,
               <Icon type="dollar" key="dollar" />,
