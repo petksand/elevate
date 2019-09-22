@@ -23,14 +23,19 @@ export const Transactions = () => {
       render: text => <a>{text}</a>,
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
+      title: 'Amount',
+      dataIndex: 'amount',
+      key: 'amount',
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: 'Date',
+      dataIndex: 'date',
+      key: 'date',
+    },
+    {
+      title: 'Location',
+      dataIndex: 'location',
+      key: 'location',
     },
     {
       title: 'Tags',
@@ -57,35 +62,41 @@ export const Transactions = () => {
       key: 'action',
       render: (text, record) => (
         <span>
-          <a>Invite {record.name}</a>
+          <a>Find deals for {record.name}</a>
           <Divider type="vertical" />
-          <a>Delete</a>
+          <a>Details</a>
         </span>
       ),
     },
   ];
+
+  let current_datetime = new Date()
+  let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds() 
   
   const data = [
     {
       key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
+      name: 'Mos Mos',
+      amount: "$"+15,
+      date: formatted_date,
+      location: '88 Queens Quay West',
+      tags: ['coffee', 'food'],
     },
     {
       key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
+      name: "TopHat",
+      amount: "$"+42,
+      date: formatted_date,
+      location: '151 Bloor St W Suite 200',
+      tags: ['education','software'],
     },
     {
       key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
+      name: 'Revelo Bikes',
+      amount: "$"+1520,
+      date: formatted_date,
+      location: '42 Industrial Street',
+      tags: ['bike', 'outdoor', 'sports'],
     },
   ];
 
@@ -98,7 +109,7 @@ export const Transactions = () => {
             cover={
               <img
                 alt="mos mos image"
-                src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                src="https://discover.rbcroyalbank.com/wp-content/uploads/IMG_2577-1.jpg"
               />
             }
             actions={[
@@ -107,9 +118,9 @@ export const Transactions = () => {
             ]}
           >
             <Meta
-              avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+              avatar={<Avatar src={require("./assets/mos_mos_avatar.PNG")} />}
               title="Mos Mos"
-              description="This is the description"
+              description="Mos Mos elevates the average coffee experience by steaming all added milk and incorporating it by slowly stirring beverages while pouring, so all the flavour and milk doesn't settle at the bottom."
             />
           </Card>
         </Col>
@@ -118,8 +129,8 @@ export const Transactions = () => {
             style={{ width: 300 }}
             cover={
               <img
-                alt="example"
-                src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                alt="tophat"
+                src={require("./assets/top_hat.png")}
               />
             }
             actions={[
@@ -128,9 +139,9 @@ export const Transactions = () => {
             ]}
           >
             <Meta
-              avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-              title="Mos Mos"
-              description="This is the description"
+              avatar={<Avatar src={require("./assets/tophat_avatar.png")} />}
+              title="TopHat"
+              description="Top Hat is education software built for professors and teaching faculty. Make your classroom come to life with the best active learning platform. Let's Make Education Better."
             />
           </Card>
         </Col>
@@ -139,8 +150,8 @@ export const Transactions = () => {
             style={{ width: 300 }}
             cover={
               <img
-                alt="example"
-                src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                alt="revelo"
+                src={require("./assets/revelo.jpg")}
               />
             }
             actions={[
@@ -149,9 +160,9 @@ export const Transactions = () => {
             ]}
           >
             <Meta
-              avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-              title="Mos Mos"
-              description="This is the description"
+              avatar={<Avatar src={require("./assets/revelo_avatar.jpg")} />}
+              title="Revelo bikes"
+              description="Revelo folding bikes fold and roll faster, store thinner, ride better and feature innovations that make life more convenient for modern riders. Simplicity and flexibility make Revelo bikes and electric bikes unlike anything else you’ve ridden."
             />
           </Card>
         </Col>
