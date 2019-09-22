@@ -3,7 +3,12 @@ import axios from 'axios';
 export class AppService {
     constructor() {
         const baseURL = 'https://uniwards-api.herokuapp.com/';
-        this.axios = axios.create({ baseURL });
+        this.axios = axios.create({
+            baseURL,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
+        });
     }
 
     /**
