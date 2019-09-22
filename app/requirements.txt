@@ -5,3 +5,4 @@ qrcode==6.1
 pymongo
 dnspython==1.16.0
 Image==1.5.27
+flask-cors

@@ -64,8 +64,8 @@ def does_qualify(promotion, transaction):
         return True
 
     curr_amount = promotion["curr_amount"]
-    qualifier = promotion["minimum"]
-    amt = transaction["amount"]
+    qualifier = int(promotion["minimum"])
+    amt = int(transaction["amount"])
 
     # update amount
     curr_amount += amt
@@ -85,7 +85,10 @@ def get_qr_code(promotion):
     """
     discount = "{}%".format(promotion["discount_percent"])
     qr_code = qr.make("{} off at {}: {}".format(discount, promotion["name"], promotion["qr_code_id"]))
-    qr_code.save('qrcodes/{}_{}_qr_code.jpg'.format(promotion["name"].replace(" ","_"), promotion["_id"]))
+    try:
+        qr_code.save('qrcodes/{}_{}_qr_code.jpg'.format(promotion["name"].replace(" ","_"), promotion["_id"]))
+    except:
+        pass
 
     return promotion
 
